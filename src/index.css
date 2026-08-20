@@ -1,0 +1,179 @@
+@import "@fontsource/geist-sans/400.css";
+@import "@fontsource/geist-sans/500.css";
+@import "@fontsource/geist-sans/600.css";
+@import "@fontsource/geist-sans/700.css";
+
+@import url("https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Core theme */
+    --background: 260 87% 3%;
+    --foreground: 40 6% 95%;
+
+    /* Hero */
+    --hero-sub: 40 6% 82%;
+
+    --primary: 40 6% 95%;
+    --primary-foreground: 260 87% 3%;
+
+    --secondary: 260 30% 12%;
+    --secondary-foreground: 40 6% 95%;
+
+    --muted: 260 30% 12%;
+    --muted-foreground: 40 6% 65%;
+
+    --accent: 260 30% 14%;
+    --accent-foreground: 40 6% 95%;
+
+    /* Surfaces for the app UI. The hero sits directly on --background; cards
+       lift off it just enough to read as separate without glowing. */
+    --card: 260 45% 6%;
+    --card-foreground: 40 6% 95%;
+    --elevated: 260 40% 9%;
+
+    /* Was 40 6% 95% (off-white) — invisible on the hero because nothing there
+       has a border, but it made every card outline glare once the app UI
+       arrived. Now a hairline that reads as an edge, not a highlight. */
+    --border: 260 30% 15%;
+    --input: 260 30% 14%;
+    --ring: 258 90% 66%;
+
+    --success: 152 55% 45%;
+    --warning: 43 96% 66%;
+
+    --radius: 0.75rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: "Geist Sans", ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer utilities {
+  .font-general-sans {
+    font-family: "General Sans", "Geist Sans", ui-sans-serif, sans-serif;
+  }
+
+  /* The brand gradient, reused wherever a phrase needs emphasis. */
+  .text-gradient-brand {
+    background-image: linear-gradient(to left, #6366f1, #a855f7, #fcd34d);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Section rhythm — one place to tune vertical density across the site. */
+  .section-y {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+  @media (min-width: 768px) {
+    .section-y {
+      padding-top: 7rem;
+      padding-bottom: 7rem;
+    }
+  }
+
+  .hairline {
+    background-image: linear-gradient(
+      to right,
+      transparent,
+      hsl(var(--foreground) / 0.2),
+      transparent
+    );
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Liquid glass
+--------------------------------------------------------------------------- */
+.liquid-glass {
+  background: rgba(255, 255, 255, 0.01);
+  background-blend-mode: luminosity;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: none;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.liquid-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.4px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.45) 0%,
+    rgba(255, 255, 255, 0.15) 20%,
+    rgba(255, 255, 255, 0) 40%,
+    rgba(255, 255, 255, 0) 60%,
+    rgba(255, 255, 255, 0.15) 80%,
+    rgba(255, 255, 255, 0.45) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ---------------------------------------------------------------------------
+   Marquee
+--------------------------------------------------------------------------- */
+@keyframes marquee {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+
+/* Respect the OS setting — the marquee and the video fade are decorative. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Focus ring: one consistent, high-contrast treatment everywhere. */
+:where(a, button, input, textarea, [tabindex]):focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+  border-radius: 4px;
+}
