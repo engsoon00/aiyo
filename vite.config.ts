@@ -20,13 +20,34 @@ function spaFallback(): Plugin {
   };
 }
 
+/**
+ * Where the built site will be served from.
+ *
+ * A GitHub Pages project site lives at /<repo>/, a user site at /. Getting this
+ * wrong emits /assets/... instead of /<repo>/assets/..., every asset 404s, and
+ * the page renders blank — so this resolves it three ways, most explicit first:
+ *
+ *   1. VITE_BASE, if a workflow sets it explicitly.
+ *   2. GITHUB_REPOSITORY, which GitHub Actions sets on EVERY run. This means a
+ *      plain `npm run build` in any workflow still produces the right paths,
+ *      even a starter template that never heard of VITE_BASE.
+ *   3. "/" for local dev and preview.
+ */
+function resolveBase(): string {
+  if (process.env.VITE_BASE) return process.env.VITE_BASE;
+
+  const repo = process.env.GITHUB_REPOSITORY?.split("/")[1];
+  if (repo) return repo.endsWith(".github.io") ? "/" : `/${repo}/`;
+
+  return "/";
+}
+
+const base = resolveBase();
+// Surfaced in the Actions log so a wrong base is obvious at a glance.
+console.log(`[vite] building with base: ${base}`);
+
 export default defineConfig({
-  /**
-   * A project site lives at /<repo>/, a user site at /. The deploy workflow
-   * works out which and passes it in, so nothing here is hardcoded to a repo
-   * name — local dev and preview stay at "/".
-   */
-  base: process.env.VITE_BASE || "/",
+  base,
   plugins: [react(), spaFallback()],
   resolve: {
     alias: {

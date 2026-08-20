@@ -3,7 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Power AI</title>
+
+    <!-- %BASE_URL% is substituted by Vite at build time: "/" locally, "/aiyo/"
+         on GitHub Pages. A relative href would break on deep routes like
+         /aiyo/app/templates, where it would resolve to /aiyo/app/favicon.png. -->
+    <link rel="icon" type="image/svg+xml" href="%BASE_URL%favicon.svg" />
+    <link rel="alternate icon" type="image/png" href="%BASE_URL%favicon.png" />
+    <link rel="apple-touch-icon" href="%BASE_URL%apple-touch-icon.png" />
+
+    <title>AiYo — Your AI assistant for everyday errands</title>
+    <meta
+      name="description"
+      content="AiYo turns everyday errands into simple steps, preparation lists, and reminders — so you know exactly what to do next."
+    />
+    <meta name="theme-color" content="#050210" />
+
+    <meta property="og:title" content="AiYo — Your AI assistant for everyday errands" />
+    <meta
+      property="og:description"
+      content="Tell AiYo what you need to get done. It turns errands into steps, preparation lists and reminders."
+    />
+    <meta property="og:type" content="website" />
+
     <link rel="preconnect" href="https://api.fontshare.com" />
     <link
       rel="stylesheet"
