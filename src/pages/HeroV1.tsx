@@ -1,8 +1,8 @@
 import { ChevronDown } from "lucide-react";
 
 import { BackgroundVideo } from "@/components/BackgroundVideo";
+import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/logo.png";
 
 const NAV_ITEMS = [
   { label: "Features", hasDropdown: true },
@@ -42,7 +42,7 @@ export default function HeroV1() {
           <header className="relative z-10">
             <nav className="flex w-full flex-row items-center justify-between px-8 py-5">
               <a href="/" className="flex items-center">
-                <img src={logo} alt="Logo" className="h-8 w-auto" />
+                <Logo />
               </a>
 
               <div className="hidden items-center gap-8 md:flex">

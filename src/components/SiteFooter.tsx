@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 
 import { GetStartedDialog } from "@/components/GetStartedDialog";
+import { Logo } from "@/components/Logo";
 import { isAndroidLive, ROUTES } from "@/lib/config";
-import logo from "@/assets/logo.png";
 
 /**
  * §28 asks for Product / Support / Legal columns, and also says: do not invent
@@ -29,7 +29,7 @@ export function SiteFooter() {
       <div className="mx-auto w-full max-w-content px-5 py-12 md:px-8 md:py-16">
         <div className="flex flex-col gap-10 md:flex-row md:justify-between md:gap-8">
           <div className="max-w-xs">
-            <img src={logo} alt="AiYo" className="h-8 w-auto" />
+            <Logo />
             <p className="mt-4 text-sm leading-6 text-muted-foreground">
               Your AI assistant for everyday errands.
             </p>

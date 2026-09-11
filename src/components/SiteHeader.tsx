@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 
 import { GetStartedDialog } from "@/components/GetStartedDialog";
+import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/lib/config";
-import logo from "@/assets/logo.png";
 
 const SECTIONS = [
   { label: "How It Works", href: "#how-it-works" },
@@ -20,7 +20,7 @@ export function SiteHeader() {
     <header className="relative z-30">
       <nav className="mx-auto flex w-full max-w-content items-center justify-between px-5 py-5 md:px-8">
         <Link to={ROUTES.landing} className="flex items-center" aria-label="AiYo home">
-          <img src={logo} alt="AiYo" className="h-8 w-auto" />
+          <Logo />
         </Link>
 
         <div className="hidden items-center gap-8 md:flex">

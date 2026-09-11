@@ -8,10 +8,10 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
+import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/lib/config";
 import { cn } from "@/lib/utils";
-import logo from "@/assets/logo.png";
 
 const NAV: { to: string; label: string; icon: LucideIcon; end?: boolean }[] = [
   { to: ROUTES.app, label: "Dashboard", icon: HomeIcon, end: true },
@@ -29,7 +29,7 @@ export function AppLayout({ children }: { children: ReactNode }) {
       {/* Desktop sidebar */}
       <aside className="fixed inset-y-0 left-0 hidden w-60 flex-col border-r border-border bg-[hsl(260_60%_4%)] px-4 py-6 lg:flex">
         <Link to={ROUTES.landing} className="px-2" aria-label="AiYo home">
-          <img src={logo} alt="AiYo" className="h-8 w-auto" />
+          <Logo />
         </Link>
 
         <Button variant="heroPrimary" className="mt-7 w-full" asChild>
@@ -71,7 +71,7 @@ export function AppLayout({ children }: { children: ReactNode }) {
       {/* Mobile top bar */}
       <header className="sticky top-0 z-30 flex items-center justify-between border-b border-border bg-background/90 px-5 py-3.5 backdrop-blur lg:hidden">
         <Link to={ROUTES.landing} aria-label="AiYo home">
-          <img src={logo} alt="AiYo" className="h-7 w-auto" />
+          <Logo size="sm" />
         </Link>
         <Button variant="heroSecondary" className="rounded-full px-3.5 py-1.5" asChild>
           <Link to={ROUTES.create}>
