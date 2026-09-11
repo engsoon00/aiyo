@@ -25,6 +25,14 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+        env:
+          # A custom domain (www.aiyoo.store) is configured in Pages settings,
+          # and GitHub serves custom domains at the root — not under /aiyo/,
+          # which is what vite.config.ts's resolveBase() would pick by default
+          # for this repo name. Override it here rather than in the config, so
+          # a build without this var (e.g. a plain github.io/aiyo/ deploy)
+          # still falls back to the repo-name-based path.
+          VITE_BASE: /      
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
