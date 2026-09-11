@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
+import { QRCodeSVG } from "qrcode.react";
 
 import { GetStartedDialog } from "@/components/GetStartedDialog";
 import { Logo } from "@/components/Logo";
-import { isAndroidLive, ROUTES } from "@/lib/config";
+import { isAndroidLive, ROUTES, STORE } from "@/lib/config";
+import logoMark from "@/assets/logo.png";
 
 /**
  * §28 asks for Product / Support / Legal columns, and also says: do not invent
@@ -24,6 +26,8 @@ const UNPUBLISHED = {
 };
 
 export function SiteFooter() {
+  const playUrl = STORE.googlePlayUrl;
+
   return (
     <footer className="border-t border-border bg-[hsl(260_60%_4%)]">
       <div className="mx-auto w-full max-w-content px-5 py-12 md:px-8 md:py-16">
@@ -101,6 +105,40 @@ export function SiteFooter() {
               : "Mobile apps coming soon"}
           </p>
         </div>
+
+        {playUrl && (
+          <div className="mt-8 flex flex-col items-center gap-4 border-t border-border pt-8 sm:flex-row sm:justify-between">
+            <div className="text-center sm:text-left">
+              <p className="text-sm font-medium text-foreground/90">Get the AiYo app</p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                Scan to download AiYo for Android.
+              </p>
+            </div>
+            <a
+              href={playUrl}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="rounded-xl bg-white p-2"
+              aria-label="Scan to download AiYo for Android"
+            >
+              <QRCodeSVG
+                value={playUrl}
+                size={104}
+                level="H"
+                marginSize={2}
+                fgColor="#0a0a0a"
+                bgColor="#ffffff"
+                title="Scan to download AiYo for Android"
+                imageSettings={{
+                  src: logoMark,
+                  height: 24,
+                  width: 24,
+                  excavate: true,
+                }}
+              />
+            </a>
+          </div>
+        )}
       </div>
     </footer>
   );

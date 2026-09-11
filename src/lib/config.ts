@@ -19,7 +19,7 @@ export interface StoreConfig {
 }
 
 export const STORE: StoreConfig = {
-  googlePlayUrl: null,
+  googlePlayUrl: "https://loadly.io/AjoY9YA6",
   androidPackageName: null,
   appStoreUrl: null,
 };
